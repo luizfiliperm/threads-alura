@@ -1,4 +1,4 @@
-package br.com.alura.threads;
+package br.com.alura.threads.calculator;
 
 import javax.swing.*;
 import java.math.BigInteger;
