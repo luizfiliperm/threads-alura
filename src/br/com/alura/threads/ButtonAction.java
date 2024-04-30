@@ -22,18 +22,9 @@ public class ButtonAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		long value1 = Long.parseLong(first.getText());
-		long value2 = Long.parseLong(second.getText());
-		BigInteger calculo = new BigInteger("0");
-		
-		for (int i = 0; i < value1; i++) {
-			for (int j = 0; j < value2; j++) {
-				calculo = calculo.add(new BigInteger("1"));
-			}
-		}
-
-		result.setText(calculo.toString());
+		Runnable task = new MultiplyTask(first, second, result);
+		Thread calculoThread = new Thread(task, "Calculator Thread");
+		calculoThread.start();
 	}
 
 }
