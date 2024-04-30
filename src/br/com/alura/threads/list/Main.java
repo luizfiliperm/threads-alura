@@ -9,8 +9,6 @@ public class Main {
             new Thread(new AddElementTask(list, i)).start();
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(i + " - " + list.getElement(i));
-        }
+        new Thread(new PrintListTask(list)).start();
     }
 }

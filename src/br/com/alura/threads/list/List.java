@@ -6,8 +6,18 @@ public class List {
     private int index = 0;
 
     public synchronized void add(String element) {
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         this.elements[index] = element;
         this.index++;
+
+        if(index == size()){
+            System.out.println("List is full, notify");
+            this.notify();
+        }
     }
 
     public int size(){
@@ -16,5 +26,9 @@ public class List {
 
     public String getElement(int position){
         return this.elements[position];
+    }
+
+    public boolean isFull() {
+        return index == elements.length;
     }
 }
