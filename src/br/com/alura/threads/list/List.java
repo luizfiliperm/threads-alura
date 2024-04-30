@@ -5,11 +5,9 @@ public class List {
     private String[] elements = new String[100];
     private int index = 0;
 
-    public void add(String element) {
-        synchronized (this){
-            this.elements[index] = element;
-            this.index++;
-        }
+    public synchronized void add(String element) {
+        this.elements[index] = element;
+        this.index++;
     }
 
     public int size(){
