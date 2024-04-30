@@ -1,12 +1,17 @@
 package br.com.alura.threads.bathroom;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Bathroom {
+
+    private Lock lock = new ReentrantLock();
 
     public void pee(){
         String guestName = Thread.currentThread().getName();
 
         System.out.println(guestName + " knocking the door");
-        synchronized(this) {
+        lock.lock();
             System.out.println(guestName + " entering the bathroom");
             System.out.println(guestName + " doing pee");
 
@@ -19,9 +24,7 @@ public class Bathroom {
             System.out.println(guestName + " flushing the toilet");
             System.out.println(guestName + " washing hands");
             System.out.println(guestName + " leaving the bathroom");
-        }
-
-
+        lock.unlock();
 
     }
 
@@ -29,7 +32,7 @@ public class Bathroom {
         String guestName = Thread.currentThread().getName();
 
         System.out.println(guestName + " knocking the door");
-        synchronized (this){
+        lock.lock();
             System.out.println(guestName + " entering the bathroom");
             System.out.println(guestName + " doing poop");
 
@@ -42,6 +45,6 @@ public class Bathroom {
             System.out.println(guestName + " flushing the toilet");
             System.out.println(guestName + " washing hands");
             System.out.println(guestName + " leaving the bathroom");
-        }
+        lock.unlock();
     }
 }
