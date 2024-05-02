@@ -11,13 +11,13 @@ public class TaskAccessProcedure implements Runnable {
 
     @Override
     public void run() {
-        synchronized (tx) {
-            System.out.println("Starting transaction");
-            tx.begin();
+        synchronized (pool) {
+            System.out.println("Getting connection from the pool");
+            pool.getConnection();
+            synchronized (tx) {
+                System.out.println("Starting transaction");
+                tx.begin();
 
-            synchronized (pool) {
-                System.out.println("Getting connection from the pool");
-                pool.getConnection();
             }
         }
     }
